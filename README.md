@@ -244,6 +244,12 @@ You can then do the following:
     RAILS_ENV=production script/delayed_job -n 2 start
     RAILS_ENV=production script/delayed_job stop
 
+    # Option --exclude-specified-queues will do inverse of queues processing by skipping ones from --queue, --queues.
+    # If both --pool=* --exclude-specified-queues given, no exclusions will by applied on "*".
+
+    # Use the --pool option to specify a worker pool.
+    # You can use this option multiple times to start different numbers of workers for different queues.
+
     # Set the --queue or --queues option to work from a particular queue.
     RAILS_ENV=production script/delayed_job --queue=tracking start
     RAILS_ENV=production script/delayed_job --queues=mailers,tasks start
@@ -268,6 +274,10 @@ You can also invoke `rake jobs:work` which will start working off jobs. You can
 cancel the rake task with `CTRL-C`.
 
 If you want to just run all available jobs and exit you can use `rake jobs:workoff`
+
+If EXCLUDE_SPECIFIED_QUEUES set to YES, then queues defined by QUEUE, QUEUES will be skipped instead.
+See option --exclude-specified-queues description for special case of queue "*"
+
 
 Work off queues by setting the `QUEUE` or `QUEUES` environment variable.
 
